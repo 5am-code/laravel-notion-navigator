@@ -25,17 +25,21 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/notion', function() {
+Route::get('/notion', function () {
     $notion = new Notion();
-    return view('notion_base', ['entities' =>  $notion->search()->query()]);
+    $entities = $notion->search()->query();
+    $entities = $entities->sortBy(function ($item) {
+        return $item->getObjectType();
+    });
+    return view('notion_base', ['entities' => $entities]);
 });
 
-Route::get('/notion/page/{pageId}', function($pageId) {
+Route::get('/notion/page/{pageId}', function ($pageId) {
     $notion = new Notion();
     return view('notion_page', ['page' => $notion->pages()->find($pageId), 'blocks' => $notion->block($pageId)->children()]);
 });
 
-Route::get('/notion/database/{databaseId}', function($databaseId) {
+Route::get('/notion/database/{databaseId}', function ($databaseId) {
     $notion = new Notion();
     return view('notion_database', ['database' => $notion->databases()->find($databaseId), 'entries' => $notion->database($databaseId)->query()]);
 });
