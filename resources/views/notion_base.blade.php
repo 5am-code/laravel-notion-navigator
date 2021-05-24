@@ -2,19 +2,14 @@
 
 @section('content')
 
-    <img class="m-3 w-44" src="https://cdn.worldvectorlogo.com/logos/notion-2.svg" />
-    <span>All Pages and Databases included in your integration</span>
-
+    All databases/pages within your integration:
     @foreach ($entities as $entity)
         @if ($entity->getObjectType() == 'page')
             <a class="block px-4 py-2 mt-1 duration-200 transform bg-white border-gray-200 rounded shadow w-96 hover:shadow-lg hover:translate-x-2 hover:bg-indigo-50"
-                href="/notion/page/{{ $entity->getId() }}">📑
-            @else
-                <a class="block px-4 py-2 mt-1 duration-200 transform bg-white border-gray-200 rounded shadow w-96 hover:shadow-lg hover:translate-x-2 hover:bg-indigo-50"
-                    href="/notion/database/{{ $entity->getId() }}">📚
+                href="/notion/page/{{ $entity->getId() }}">📑 {{ $entity->getTitle() }} </a>
+        @else
+            <a class="block px-4 py-2 mt-1 duration-200 transform bg-white border-gray-200 rounded shadow w-96 hover:shadow-lg hover:translate-x-2 hover:bg-indigo-50"
+                href="/notion/database/{{ $entity->getId() }}">📚 {{ $entity->getTitle() }} </a>
         @endif
-        {{ $entity->getTitle() }}
-        </a>
-        </div>
     @endforeach
 @endsection

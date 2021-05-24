@@ -26,8 +26,7 @@ Route::get('/', function () {
 });
 
 Route::get('/notion', function () {
-    $notion = new Notion();
-    $entities = $notion->search()->query();
+    $entities = \Notion::search()->query()->asCollection();
     $entities = $entities->sortBy(function ($item) {
         return $item->getObjectType();
     });
@@ -35,13 +34,11 @@ Route::get('/notion', function () {
 });
 
 Route::get('/notion/page/{pageId}', function ($pageId) {
-    $notion = new Notion();
-    return view('notion_page', ['page' => $notion->pages()->find($pageId), 'blocks' => $notion->block($pageId)->children()]);
+    return view('notion_page', ['page' => \Notion::pages()->find($pageId), 'blocks' => \Notion::block($pageId)->children()]);
 });
 
 Route::get('/notion/database/{databaseId}', function ($databaseId) {
-    $notion = new Notion();
-    return view('notion_database', ['database' => $notion->databases()->find($databaseId), 'entries' => $notion->database($databaseId)->query()]);
+    return view('notion_database', ['database' => \Notion::databases()->find($databaseId), 'entries' => \Notion::database($databaseId)->query()->asCollection()]);
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
