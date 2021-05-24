@@ -12,5 +12,5 @@ Feel free to play around and discover the power of the Notion API.
 
 # Example Navigation
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/3506359/119398856-73ff4880-bcd8-11eb-9688-ffab543c51d7.gif" width="100%" height="100%">
+    <img src="https://user-images.githubusercontent.com/3506359/119400760-ea9d4580-bcda-11eb-8a74-3ec07f958859.gif" width="100%" height="100%">
 </p>
